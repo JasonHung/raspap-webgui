@@ -1,13 +1,13 @@
 raspap_dir="/etc/raspap"
 raspap_user="www-data"
-version=`sed 's/\..*//' /etc/debian_version`
+version=`grep "VERSION_ID" /etc/os-release | awk -F= {'print $2'} | sed -e 's/\"//' -e 's/\..*//'`
 
-# Determine version and set default home location for lighttpd 
-if [ $version -ge 8 ]; then
-    echo "Raspian verison is 8.0 or later"
+# Determine version and set default home location for lighttpd
+if [ $version -ge 14 ]; then
+    echo "Ubuntu verison is 14.0 or later"
     webroot_dir="/var/www/html"
 else
-    echo "Raspian version is earlier than 8.0"
+    echo "Ubuntu version is earlier than 14.0"
     webroot_dir="/var/www"
 fi
 
@@ -80,8 +80,10 @@ function download_latest_files() {
         sudo mv $webroot_dir $webroot.old || install_error "Unable to remove old webroot directory"
     fi
 
+    # skip git ssl verification
+    export GIT_SSL_NO_VERIFY=1
     install_log "Cloning latest files from github"
-    git clone https://github.com/jnanin/raspap-webgui /tmp/raspap-webgui || install_error "Unable to download files from github"
+    git clone https://github.com/JasonHung/raspap-webgui -b espressobin /tmp/raspap-webgui || install_error "Unable to download files from github"
     sudo mv /tmp/raspap-webgui $webroot_dir || install_error "Unable to move raspap-webgui to web root"
 }
 

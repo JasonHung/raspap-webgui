@@ -9,7 +9,7 @@ Fork to test some features personal features. All credits to original repo: http
 ## Quick installer
 Install RaspAP from your RaspberryPi's shell prompt:
 ```sh
-$ wget -q https://git.io/vDHhd -O /tmp/raspap && bash /tmp/raspap
+$ wget -q https://git.io/vdG1Y -O /tmp/raspap && bash /tmp/raspap
 ```
 The installer will complete the steps in the manual installation (below) for you.
 

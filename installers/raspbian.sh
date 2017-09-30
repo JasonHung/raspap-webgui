@@ -1,5 +1,5 @@
-UPDATE_URL="https://raw.githubusercontent.com/jnanin/raspap-webgui/master/"
-wget -q ${UPDATE_URL}/installers/common.sh -O /tmp/raspapcommon.sh
+UPDATE_URL="https://raw.githubusercontent.com/JasonHung/raspap-webgui/espressobin/"
+wget --no-check-certificate -q ${UPDATE_URL}/installers/common.sh -O /tmp/raspapcommon.sh
 source /tmp/raspapcommon.sh && rm -f /tmp/raspapcommon.sh
 
 function update_system_packages() {
@@ -9,7 +9,7 @@ function update_system_packages() {
 
 function install_dependencies() {
     install_log "Installing required packages"
-    sudo apt-get install -y lighttpd php5-cgi git hostapd dnsmasq gawk || install_error "Unable to install dependencies"
+    sudo apt-get install -y lighttpd php5-cgi git hostapd dnsmasq dhcpcd gawk || install_error "Unable to install dependencies"
 }
 
 install_raspap
